@@ -1,12 +1,18 @@
 package br.com.fiap.plusoft.challenge.java.model.cliente;
 
+import br.com.fiap.plusoft.challenge.java.model.cliente.dto.CadastrarClienteDTO;
 import br.com.fiap.plusoft.challenge.java.model.endereco.EnderecoCliente;
 import br.com.fiap.plusoft.challenge.java.model.ramo.Ramo;
 import br.com.fiap.plusoft.challenge.java.model.usuario.Usuario;
 import jakarta.persistence.*;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotEmpty;
+import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.Past;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import org.hibernate.validator.constraints.Length;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
@@ -25,12 +31,16 @@ public class Cliente {
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "inov_cliente_seq")
     @Column(name = "cd_cliente")
     private Long codigo;
+
     @Column(name = "nm_cliente", length = 100, nullable = false)
     private String nome;
+
     @Column(name = "dt_nascimento", nullable = false)
     private LocalDate dataNascimento;
+
     @Column(name = "nr_cpf", length = 11, nullable = false, unique = true)
     private String cpf;
+
     @Column(name = "nr_telefone", length = 15, nullable = false, unique = true)
     private String telefone;
 
@@ -44,5 +54,13 @@ public class Cliente {
 
     @OneToMany(mappedBy = "cliente",cascade = CascadeType.ALL)
     private List<EnderecoCliente> enderecoClientes;
+
+    public Cliente(CadastrarClienteDTO dto){
+        this.nome = dto.getNome();
+        this.dataNascimento = dto.getDataNascimento();
+        this.cpf = dto.getCpf();
+        this.telefone = dto.getTelefone();
+        enderecoClientes = new ArrayList<>();
+    }
 
 }

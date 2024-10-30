@@ -1,6 +1,7 @@
 package br.com.fiap.plusoft.challenge.java.model.ramo;
 
 import br.com.fiap.plusoft.challenge.java.model.cliente.Cliente;
+import br.com.fiap.plusoft.challenge.java.model.cliente.dto.CadastrarClienteDTO;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -29,5 +30,11 @@ public class Ramo {
 
     @OneToMany(mappedBy = "ramo")
     private List<Cliente> cliente;
+
+    public Ramo(CadastrarClienteDTO dto){
+        this.nome = dto.getNomeRamo();
+        this.descricao = dto.getDescRamo();
+        cliente = new ArrayList<>();
+    }
 
 }

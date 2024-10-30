@@ -1,5 +1,6 @@
 package br.com.fiap.plusoft.challenge.java.model.endereco.logradouro;
 
+import br.com.fiap.plusoft.challenge.java.model.cliente.dto.CadastrarClienteDTO;
 import br.com.fiap.plusoft.challenge.java.model.endereco.EnderecoCliente;
 import br.com.fiap.plusoft.challenge.java.model.endereco.bairro.Bairro;
 import jakarta.persistence.*;
@@ -7,6 +8,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Getter
@@ -33,4 +35,10 @@ public class Logradouro {
 
     @OneToMany(mappedBy = "logradouro")
     private List<EnderecoCliente> enderecoClientes;
+
+    public Logradouro(CadastrarClienteDTO dto){
+        this.nome = dto.getNomeLogradouro();
+        this.cep = dto.getCep();
+        enderecoClientes = new ArrayList<>();
+    }
 }

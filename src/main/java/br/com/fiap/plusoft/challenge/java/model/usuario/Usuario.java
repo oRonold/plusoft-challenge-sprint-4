@@ -1,14 +1,19 @@
 package br.com.fiap.plusoft.challenge.java.model.usuario;
 
+import br.com.fiap.plusoft.challenge.java.infrastructure.security.Perfil;
 import br.com.fiap.plusoft.challenge.java.model.cliente.Cliente;
 import br.com.fiap.plusoft.challenge.java.model.pesquisa.Pesquisa;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.userdetails.UserDetails;
 
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
+import java.util.Set;
 
 @Getter
 @Setter
@@ -36,4 +41,9 @@ public class Usuario {
     @OneToMany(mappedBy = "usuario", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     private List<Pesquisa> pesquisas;
 
+    @ManyToMany(fetch = FetchType.EAGER)
+    @JoinTable(name = "INOV_TB_USUARIO_PERFIL",
+        joinColumns = @JoinColumn(name = "cd_usuario"),
+        inverseJoinColumns = @JoinColumn(name = "cd_perfil"))
+    private Set<Perfil> perfis;
 }

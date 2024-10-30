@@ -1,6 +1,7 @@
 package br.com.fiap.plusoft.challenge.java.model.endereco;
 
 import br.com.fiap.plusoft.challenge.java.model.cliente.Cliente;
+import br.com.fiap.plusoft.challenge.java.model.cliente.dto.CadastrarClienteDTO;
 import br.com.fiap.plusoft.challenge.java.model.endereco.logradouro.Logradouro;
 import jakarta.persistence.*;
 import lombok.Getter;
@@ -32,4 +33,9 @@ public class EnderecoCliente {
     @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "cd_logradouro")
     private Logradouro logradouro;
+
+    public EnderecoCliente(CadastrarClienteDTO dto) {
+        this.numero = dto.getNumeroLogradouro();
+        this.pontoReferencia = dto.getPontoReferencia();
+    }
 }

@@ -1,10 +1,12 @@
 package br.com.fiap.plusoft.challenge.java.model.endereco.pais;
 
+import br.com.fiap.plusoft.challenge.java.model.cliente.dto.CadastrarClienteDTO;
 import br.com.fiap.plusoft.challenge.java.model.endereco.estado.Estado;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Getter
@@ -26,4 +28,10 @@ public class Pais {
 
     @OneToMany(mappedBy = "pais", cascade = CascadeType.ALL)
     private List<Estado> estados;
+
+    public Pais(CadastrarClienteDTO dto){
+        this.nome = dto.getNomePais();
+        this.numeroCodigo = dto.getCodPais();
+        estados = new ArrayList<>();
+    }
 }

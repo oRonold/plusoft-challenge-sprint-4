@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="pt-br" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cadastro de Cliente</title>
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body>
+
+<div class="container mt-5">
+    <h2 class="text-center mb-4">Cadastro de Cliente</h2>
+    <form th:action="@{/clientes/cadastrar}" method="post" th:object="${usuario}">
+
+        <!-- Dados Pessoais -->
+        <div class="card mb-4">
+            <div class="card-header">Dados Pessoais</div>
+            <div class="card-body">
+                <div class="form-group">
+                    <label class="form-label">Nome</label>
+                    <input type="text" class="form-control" th:field="*{nome}" required>
+                    <p th:if="${#fields.hasErrors('nome')}" class="text text-danger" th:errors="*{nome}"></p>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-label">Data de Nascimento</label>
+                    <input type="date" class="form-control" th:field="*{dataNascimento}" required>
+                    <p th:if="${#fields.hasErrors('dataNascimento')}" class="text text-danger" th:errors="*{dataNascimento}"></p>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-label">CPF</label>
+                    <input type="text" class="form-control" th:field="*{cpf}" maxlength="11" required>
+                    <p th:if="${#fields.hasErrors('cpf')}" class="text text-danger" th:errors="*{cpf}"></p>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-label">Telefone</label>
+                    <input type="text" class="form-control" th:field="*{telefone}" maxlength="15" required>
+                    <p th:if="${#fields.hasErrors('telefone')}" class="text text-danger" th:errors="*{telefone}"></p>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-label">Email</label>
+                    <input type="email" class="form-control" th:field="*{email}" required>
+                    <p th:if="${#fields.hasErrors('email')}" class="text text-danger" th:errors="*{email}"></p>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-label">Senha</label>
+                    <input type="password" class="form-control" th:field="*{senha}" required>
+                    <p th:if="${#fields.hasErrors('senha')}" class="text text-danger" th:errors="*{senha}"></p>
+                </div>
+            </div>
+        </div>
+
+        <div class="card mb-4">
+            <div class="card-header">Dados Comerciais</div>
+            <div class="card-body">
+                <div class="form-group">
+                    <label class="form-label">Nome do Ramo</label>
+                    <input type="text" class="form-control" th:field="*{nomeRamo}" required>
+                    <p th:if="${#fields.hasErrors('nomeRamo')}" class="text text-danger" th:errors="*{nomeRamo}"></p>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-label">Descrição do Ramo</label>
+                    <textarea class="form-control" th:field="*{descRamo}" rows="3" required></textarea>
+                    <p th:if="${#fields.hasErrors('descRamo')}" class="text text-danger" th:errors="*{descRamo}"></p>
+                </div>
+            </div>
+        </div>
+
+        <div class="card mb-4">
+            <div class="card-header">Endereço</div>
+            <div class="card-body">
+                <div class="form-row">
+                    <div class="form-group col-md-4">
+                        <label class="form-label">Número</label>
+                        <input type="text" class="form-control" th:field="*{numeroLogradouro}" required>
+                        <p th:if="${#fields.hasErrors('numeroLogradouro')}" class="text text-danger" th:errors="*{numeroLogradouro}"></p>
+                    </div>
+
+                    <div class="form-group col-md-8">
+                        <label class="form-label">Ponto de Referência</label>
+                        <input type="text" class="form-control" th:field="*{pontoReferencia}">
+                    </div>
+                </div>
+
+                <div class="form-row">
+                    <div class="form-group col-md-6">
+                        <label class="form-label">Nome do Logradouro</label>
+                        <input type="text" class="form-control" th:field="*{nomeLogradouro}" required>
+                        <p th:if="${#fields.hasErrors('nomeLogradouro')}" class="text text-danger" th:errors="*{nomeLogradouro}"></p>
+                    </div>
+
+                    <div class="form-group col-md-3">
+                        <label class="form-label">CEP</label>
+                        <input type="text" class="form-control" th:field="*{cep}" maxlength="9" required>
+                        <p th:if="${#fields.hasErrors('cep')}" class="text text-danger" th:errors="*{cep}"></p>
+                    </div>
+
+                    <div class="form-group col-md-3">
+                        <label class="form-label">Bairro</label>
+                        <input type="text" class="form-control" th:field="*{nomeBairro}" required>
+                        <p th:if="${#fields.hasErrors('nomeBairro')}" class="text text-danger" th:errors="*{nomeBairro}"></p>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-label">Zona do Bairro</label>
+                    <input type="text" class="form-control" th:field="*{zonaBairro}">
+                    <p th:if="${#fields.hasErrors('zonaBairro')}" class="text text-danger" th:errors="*{zonaBairro}"></p>
+                </div>
+
+                <div class="form-row">
+                    <div class="form-group col-md-4">
+                        <label class="form-label">Cidade</label>
+                        <input type="text" class="form-control" th:field="*{nomeCidade}" required>
+                        <p th:if="${#fields.hasErrors('nomeCidade')}" class="text text-danger" th:errors="*{nomeCidade}"></p>
+                    </div>
+
+                    <div class="form-group col-md-4">
+                        <label class="form-label">DDD</label>
+                        <input type="text" class="form-control" th:field="*{numeroDDD}" required>
+                        <p th:if="${#fields.hasErrors('numeroDDD')}" class="text text-danger" th:errors="*{numeroDDD}"></p>
+                    </div>
+
+                    <div class="form-group col-md-4">
+                        <label class="form-label">Estado</label>
+                        <input type="text" class="form-control" th:field="*{nomeEstado}" required>
+                        <p th:if="${#fields.hasErrors('nomeEstado')}" class="text text-danger" th:errors="*{nomeEstado}"></p>
+                    </div>
+                </div>
+
+                <div class="form-row">
+                    <div class="form-group col-md-6">
+                        <label class="form-label">País</label>
+                        <input type="text" class="form-control" th:field="*{nomePais}" required>
+                        <p th:if="${#fields.hasErrors('nomePais')}" class="text text-danger" th:errors="*{nomePais}"></p>
+                    </div>
+
+                    <div class="form-group col-md-6">
+                        <label class="form-label">Código do País</label>
+                        <input type="text" class="form-control" th:field="*{codPais}" required>
+                        <p th:if="${#fields.hasErrors('codPais')}" class="text text-danger" th:errors="*{codPais}"></p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Perfil -->
+        <div class="card mb-4">
+            <div class="card-header">Perfil</div>
+            <div class="card-body">
+                <div class="form-group">
+                    <label class="form-label">Perfil</label>
+                    <div th:each="perfil : ${perfil}">
+                        <input type="checkbox" th:field="*{perfil}" th:value="${perfil.nome}">
+                        <label th:text="${perfil.label}"></label><br>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="card mb-4">
+            <button type="submit" class="btn btn-primary">Cadastrar</button>
+        </div>
+    </form>
+</div>
+
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.2/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

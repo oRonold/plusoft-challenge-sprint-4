@@ -1,5 +1,6 @@
 package br.com.fiap.plusoft.challenge.java.model.endereco.cidade;
 
+import br.com.fiap.plusoft.challenge.java.model.cliente.dto.CadastrarClienteDTO;
 import br.com.fiap.plusoft.challenge.java.model.endereco.bairro.Bairro;
 import br.com.fiap.plusoft.challenge.java.model.endereco.estado.Estado;
 import jakarta.persistence.*;
@@ -7,6 +8,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Getter
@@ -33,4 +35,10 @@ public class Cidade {
 
     @OneToMany(mappedBy = "cidade")
     private List<Bairro> bairros;
+
+    public Cidade(CadastrarClienteDTO dto){
+        this.nome = dto.getNomeCidade();
+        this.ddd = dto.getNumeroDDD();
+        bairros = new ArrayList<>();
+    }
 }
