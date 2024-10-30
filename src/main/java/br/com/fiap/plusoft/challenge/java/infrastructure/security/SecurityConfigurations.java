@@ -17,12 +17,18 @@ public class SecurityConfigurations {
     @Bean
     public SecurityFilterChain configure(HttpSecurity http) throws Exception {
         http.csrf(AbstractHttpConfigurer::disable)
-                .sessionManagement(sm -> sm.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
+                .sessionManagement(sm -> sm
+                        .maximumSessions(1))
                 .authorizeHttpRequests(authorize -> authorize
-                        .requestMatchers("/public/**", "/clientes/login", "/clientes/cadastrar", "/css/**").permitAll()
+                        .requestMatchers("/public/**", "/clientes/cadastrar", "/login", "/css/**").permitAll()
                         .requestMatchers("/admin/**").hasRole("ADMIN")
-                        .requestMatchers("/clientes/**").hasRole("USER")
-                .anyRequest().authenticated());
+                        .requestMatchers("/clientes/**").hasAnyRole("ADMIN", "USER")
+                        .anyRequest().authenticated())
+                .formLogin(form ->
+                        form.loginPage("/login")
+                                .defaultSuccessUrl("/principal")
+                                .permitAll());
+
         return http.build();
     }
 

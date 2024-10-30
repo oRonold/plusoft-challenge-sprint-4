@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="pt-br" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login</title>
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body>
+
+    <div class="container vh-100 d-flex justify-content-center align-items-center">
+        <div class="col-md-4">
+            <div class="alert alert-success text-center"
+                th:if="${msgSucess !=null}" th:text="${msgSucess}">
+            </div>
+        <div class="alert alert-danger text-center"
+             th:if="${msgError !=null}" th:text="${msgError}">
+        </div>
+        <table class="table">
+            <div class="card shadow-lg p-4">
+                    <h4 class="text-center">Login</h4>
+                    <form th:action="@{/login}" method="post">
+                        <div class="form-group mb-3">
+                            <label class="form-label">Email</label>
+                            <input type="text" name="username" class="form-control" required placeholder="Insira um email">
+                        </div>
+                        <div class="form-group mb-3">
+                            <label class="form-label">Senha</label>
+                            <input type="password" name="password" class="form-control" required placeholder="Insira uma senha">
+                        </div>
+                        <div class="form-group mb-3">
+<!--                            <a class="btn btn-outline-danger text-right mb-3" style="margin-right: 4em" th:href="@{/pacientes/esqueceu-senha}">Esqueceu a senha?</a>-->
+                            <a th:href="@{/clientes/registrar}" class="btn btn-outline-secondary mb-3">Não Possui Login?</a>
+                        </div>
+                        <div class="d-grid">
+                            <button type="submit" class="btn btn-primary">Entrar</button>
+                        </div>
+                    </form>
+                </div>
+            </table>
+        </div>
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.2/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

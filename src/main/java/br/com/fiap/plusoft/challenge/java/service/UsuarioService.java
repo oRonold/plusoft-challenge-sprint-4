@@ -14,7 +14,10 @@ import br.com.fiap.plusoft.challenge.java.model.usuario.Usuario;
 import br.com.fiap.plusoft.challenge.java.repository.ClienteRepository;
 import br.com.fiap.plusoft.challenge.java.repository.PerfilRepository;
 import br.com.fiap.plusoft.challenge.java.repository.UsuarioRepository;
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletResponse;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.Authentication;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.User;
@@ -22,6 +25,7 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.security.web.authentication.logout.SecurityContextLogoutHandler;
 import org.springframework.stereotype.Service;
 
 import java.util.HashSet;
@@ -55,6 +59,14 @@ public class UsuarioService implements UserDetailsService {
                 .map(perfil -> new SimpleGrantedAuthority(perfil.getNome())).collect(Collectors.toSet());
 
         return new User(usuario.getEmail(), usuario.getSenha(), grantedAuthorities);
+    }
+
+    public String logout(HttpServletRequest request, HttpServletResponse response) {
+        var auth = SecurityContextHolder.getContext().getAuthentication();
+        if (auth != null) {
+            new SecurityContextLogoutHandler().logout(request, response, auth);
+        }
+        return "redirect:/login";
     }
 
     public void salvarUsuario(CadastrarClienteDTO dto, List<String> roles) {
@@ -105,6 +117,15 @@ public class UsuarioService implements UserDetailsService {
         pais.getEstados().add(estado);
 
         clienteRepository.save(cliente);
+    }
+
+    public Usuario pacienteAutenticado(){
+        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+        if(auth != null && auth.getPrincipal() instanceof UserDetails){
+            String username = ((UserDetails) auth.getPrincipal()).getUsername();
+            return usuarioRepository.findByEmail(username);
+        }
+        throw new IllegalStateException("Usuário não autenticado ou inválido");
     }
 
 }
