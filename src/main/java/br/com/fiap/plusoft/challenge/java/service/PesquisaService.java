@@ -35,7 +35,7 @@ public class PesquisaService {
     }
 
     public List<Pesquisa> todasPesquisas(){
-        return repository.findAllByUsuarioEmail(usuarioAutenticado().getEmail());
+        return repository.findByUsuarioEmail(usuarioAutenticado().getEmail());
     }
 
     public void concluirPesquisa(Long id){
@@ -43,6 +43,10 @@ public class PesquisaService {
         pesquisa.setStatusPesquisa(StatusPesquisa.CONCLUIDA);
 
         repository.save(pesquisa);
+    }
+
+    public void excluirPesquisa(Long codigo){
+        repository.deletePesquisaByById(codigo);
     }
 
     private Usuario usuarioAutenticado(){

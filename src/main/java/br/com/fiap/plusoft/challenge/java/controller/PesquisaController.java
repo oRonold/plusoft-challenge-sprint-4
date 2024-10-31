@@ -50,4 +50,11 @@ public class PesquisaController {
         service.concluirPesquisa(codigo);
         return "redirect:/pesquisas/todas-pesquisas";
     }
+
+    @PostMapping("excluir")
+    @Transactional
+    public String excluir(@RequestParam("pesquisaIdExcluir") Long codigo){
+        service.excluirPesquisa(codigo);
+        return "redirect:/pesquisas/todas-pesquisas";
+    }
 }

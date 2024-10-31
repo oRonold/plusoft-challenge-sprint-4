@@ -39,6 +39,13 @@
                         Concluido
                     </button>
                 </td>
+                <td>
+                    <button type="button" class="btn btn-sm btn-danger"
+                            th:onclick="|document.getElementById('pesquisaIdExcluir').value = ${pesq.codigo}|"
+                            data-bs-toggle="modal" data-bs-target="#modalExcluir">
+                        Excluir
+                    </button>
+                </td>
             </tr>
         </tbody>
     </table>
@@ -57,6 +64,26 @@
                         <input type="hidden" name="pesquisaId" id="pesquisaId">
                         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Não</button>
                         <button type="submit" class="btn btn-success">Sim</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="modal fade" id="modalExcluir" tabindex="-1" aria-labelledby="modalExcluirLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="modalExcluirLabel">Confirmação</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    A Pesquisa será excluida, esta ação é irreversível!
+                </div>
+                <div class="modal-footer">
+                    <form th:action="@{/pesquisas/excluir}" method="post">
+                        <input type="hidden" name="pesquisaIdExcluir" id="pesquisaIdExcluir">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Não</button>
+                        <button type="submit" class="btn btn-danger">Sim</button>
                     </form>
                 </div>
             </div>
