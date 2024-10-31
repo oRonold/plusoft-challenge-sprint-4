@@ -23,7 +23,7 @@ public class SecurityConfigurations {
                 .authorizeHttpRequests(authorize -> authorize
                         .requestMatchers("/public/**", "/clientes/cadastrar", "/login", "/css/**").permitAll()
                         .requestMatchers("/admin/**").hasAuthority("ADMIN")
-                        .requestMatchers("/clientes/**", "/pesquisas/**").hasAnyAuthority("ADMIN", "USER")
+                        .requestMatchers("/clientes/**", "/pesquisas/**", "/principal").hasAnyAuthority("ADMIN", "USER")
                         .anyRequest().authenticated())
                 .formLogin(form ->
                         form.loginPage("/login")
