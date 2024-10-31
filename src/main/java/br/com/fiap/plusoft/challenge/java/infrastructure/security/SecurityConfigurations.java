@@ -2,6 +2,7 @@ package br.com.fiap.plusoft.challenge.java.infrastructure.security;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.http.HttpMethod;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configurers.AbstractHttpConfigurer;
@@ -21,8 +22,8 @@ public class SecurityConfigurations {
                         .maximumSessions(1))
                 .authorizeHttpRequests(authorize -> authorize
                         .requestMatchers("/public/**", "/clientes/cadastrar", "/login", "/css/**").permitAll()
-                        .requestMatchers("/admin/**").hasRole("ADMIN")
-                        .requestMatchers("/clientes/**").hasAnyRole("ADMIN", "USER")
+                        .requestMatchers("/admin/**").hasAuthority("ADMIN")
+                        .requestMatchers("/clientes/**", "/pesquisas/**").hasAnyAuthority("ADMIN", "USER")
                         .anyRequest().authenticated())
                 .formLogin(form ->
                         form.loginPage("/login")
