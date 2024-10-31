@@ -3,6 +3,7 @@ package br.com.fiap.plusoft.challenge.java.controller;
 import br.com.fiap.plusoft.challenge.java.model.cliente.dto.CadastrarClienteDTO;
 import br.com.fiap.plusoft.challenge.java.model.usuario.dto.UsuarioLoginDTO;
 import br.com.fiap.plusoft.challenge.java.repository.PerfilRepository;
+import br.com.fiap.plusoft.challenge.java.service.ClienteService;
 import br.com.fiap.plusoft.challenge.java.service.UsuarioService;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,6 +23,9 @@ public class ClienteController {
 
     @Autowired
     private UsuarioService usuarioService;
+
+    @Autowired
+    private ClienteService clienteService;
 
     @Autowired
     private PerfilRepository perfilRepository;
@@ -46,6 +50,14 @@ public class ClienteController {
         }
         usuarioService.salvarUsuario(dto, dto.getPerfil());
         return "redirect:/login";
+    }
+
+    @GetMapping("detalhes")
+    public String detalhes(Model model){
+        var cliente = clienteService.detalhesConta();
+        model.addAttribute("cliente", cliente);
+        model.addAttribute("enderecoCliente", cliente.getEnderecoClientes());
+        return "cliente/detalhes-conta";
     }
 
 }
