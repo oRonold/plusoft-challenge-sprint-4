@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Pesquisas do Usuário</title>
-    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <link th:href="@{/webjars/bootstrap/css/bootstrap.min.css}" rel="stylesheet"/>
 </head>
 <body>
 
@@ -26,32 +26,50 @@
             <tr th:each="pesq:${pesquisas}">
                 <td th:text="${pesq.descricao}"></td>
                 <td th:text="${#temporals.format(pesq.dataPesquisa, 'dd/MM/yyyy')}"></td>
-                <td th:text="${pesq.statusPesquisa}"></td>
+                <td th:text="${pesq.statusPesquisa.label}"></td>
                 <td>
                     <span th:each="fig : ${pesq.figuraPublica}" th:text="${fig.nome}"></span>
                 </td>
                 <td th:text="${pesq.tipoServico.descricao}"></td>
                 <td th:text="${pesq.usuario.nome}"></td>
                 <td>
-                <!--                <a th:href="@{/editoras/detalhes/}+${livro.editora.id}" th:text="${livro.editora.nome}"></a>-->
-                </td>
-                <td>
-                <!--                <a th:href="@{/livros/editar/}+${livro.id}" class="btn btn-sm btn-primary">Concluido</a>-->
-                </td>
-                <td>
-                <!--                <button th:onclick="|document.getElementById('livroId').value = ${livro.id}|" type="button" class="btn btn-sm btn-danger"-->
-                <!--                        data-bs-toggle="modal" data-bs-target="#modalExcluir">Excluir</button>-->
+                    <button type="button" class="btn btn-sm btn-success"
+                            th:onclick="|document.getElementById('pesquisaId').value = ${pesq.codigo}|"
+                            data-bs-toggle="modal" data-bs-target="#modalAtualizar">
+                        Concluido
+                    </button>
                 </td>
             </tr>
         </tbody>
     </table>
+    <div class="modal fade" id="modalAtualizar" tabindex="-1" aria-labelledby="modalAtualizarLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="modalAtualizarLabel">Confirmação</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    O Status da Pesquisa será definido como Concluído
+                </div>
+                <div class="modal-footer">
+                    <form th:action="@{/pesquisas/concluir}" method="post">
+                        <input type="hidden" name="pesquisaId" id="pesquisaId">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Não</button>
+                        <button type="submit" class="btn btn-success">Sim</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
     <div class="text-center mt-4">
         <a th:href="@{/principal}" class="btn btn-primary">Voltar</a>
     </div>
 </div>
 
-<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"></script>
-<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+<script th:src="@{/webjars/jquery/jquery.min.js}"></script>
+<script th:src="@{/webjars/bootstrap/js/bootstrap.min.js}"></script>
+
 </body>
 </html>

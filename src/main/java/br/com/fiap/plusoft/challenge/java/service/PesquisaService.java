@@ -2,6 +2,7 @@ package br.com.fiap.plusoft.challenge.java.service;
 
 import br.com.fiap.plusoft.challenge.java.model.figuraPublica.FiguraPublica;
 import br.com.fiap.plusoft.challenge.java.model.pesquisa.Pesquisa;
+import br.com.fiap.plusoft.challenge.java.model.pesquisa.StatusPesquisa;
 import br.com.fiap.plusoft.challenge.java.model.pesquisa.dto.CriarPesquisaDTO;
 import br.com.fiap.plusoft.challenge.java.model.usuario.Usuario;
 import br.com.fiap.plusoft.challenge.java.repository.PesquisaRepository;
@@ -35,6 +36,13 @@ public class PesquisaService {
 
     public List<Pesquisa> todasPesquisas(){
         return repository.findAllByUsuarioEmail(usuarioAutenticado().getEmail());
+    }
+
+    public void concluirPesquisa(Long id){
+        var pesquisa = repository.getReferenceById(id);
+        pesquisa.setStatusPesquisa(StatusPesquisa.CONCLUIDA);
+
+        repository.save(pesquisa);
     }
 
     private Usuario usuarioAutenticado(){

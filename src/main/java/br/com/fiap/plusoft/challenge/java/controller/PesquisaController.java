@@ -11,10 +11,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 @Controller
@@ -23,6 +20,9 @@ public class PesquisaController {
 
     @Autowired
     private PesquisaService service;
+
+    @Autowired
+    private PesquisaRepository repository;
 
     @GetMapping("cadastrar")
     public String criarPesquisa(Model model){
@@ -43,5 +43,11 @@ public class PesquisaController {
     public String visualizarPesquisas(Model model){
         model.addAttribute("pesquisas", service.todasPesquisas());
         return "pesquisa/visualizar";
+    }
+
+    @PostMapping("concluir")
+    public String concluir(@RequestParam("pesquisaId") Long codigo){
+        service.concluirPesquisa(codigo);
+        return "redirect:/pesquisas/todas-pesquisas";
     }
 }
