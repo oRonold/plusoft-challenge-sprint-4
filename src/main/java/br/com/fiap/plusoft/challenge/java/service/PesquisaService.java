@@ -11,6 +11,8 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import java.util.List;
+
 @Service
 public class PesquisaService {
 
@@ -29,6 +31,10 @@ public class PesquisaService {
         redirectAttributes.addFlashAttribute("msg", "Pesquisa criada com sucesso!");
         repository.save(pesquisa);
         return "redirect:/clientes/principal";
+    }
+
+    public List<Pesquisa> todasPesquisas(){
+        return repository.findAllByUsuarioEmail(usuarioAutenticado().getEmail());
     }
 
     private Usuario usuarioAutenticado(){

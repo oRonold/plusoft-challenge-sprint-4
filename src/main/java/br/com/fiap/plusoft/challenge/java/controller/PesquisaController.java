@@ -2,6 +2,7 @@ package br.com.fiap.plusoft.challenge.java.controller;
 
 import br.com.fiap.plusoft.challenge.java.model.pesquisa.Pesquisa;
 import br.com.fiap.plusoft.challenge.java.model.pesquisa.dto.CriarPesquisaDTO;
+import br.com.fiap.plusoft.challenge.java.repository.PesquisaRepository;
 import br.com.fiap.plusoft.challenge.java.service.PesquisaService;
 import jakarta.validation.Valid;
 import lombok.Getter;
@@ -36,5 +37,11 @@ public class PesquisaController {
             return "pesquisa/cadastrar";
         }
         return service.criarPesquisa(dto, redirectAttributes);
+    }
+
+    @GetMapping("todas-pesquisas")
+    public String visualizarPesquisas(Model model){
+        model.addAttribute("pesquisas", service.todasPesquisas());
+        return "pesquisa/visualizar";
     }
 }
