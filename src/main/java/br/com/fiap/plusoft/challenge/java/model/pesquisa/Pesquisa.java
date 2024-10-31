@@ -1,6 +1,7 @@
 package br.com.fiap.plusoft.challenge.java.model.pesquisa;
 
 import br.com.fiap.plusoft.challenge.java.model.figuraPublica.FiguraPublica;
+import br.com.fiap.plusoft.challenge.java.model.pesquisa.dto.CriarPesquisaDTO;
 import br.com.fiap.plusoft.challenge.java.model.tipoServico.TipoServico;
 import br.com.fiap.plusoft.challenge.java.model.usuario.Usuario;
 import jakarta.persistence.*;
@@ -51,5 +52,13 @@ public class Pesquisa {
     @ManyToOne
     @JoinColumn(name = "cd_usuario")
     private Usuario usuario;
+
+    public Pesquisa(CriarPesquisaDTO dto){
+        this.descricao = dto.getDescricao();
+        this.dataPesquisa = LocalDateTime.now();
+        this.statusPesquisa = StatusPesquisa.EM_ANDAMENTO;
+        this.figuraPublica = new ArrayList<>();
+        this.tipoServico = new TipoServico(dto);
+    }
 
 }

@@ -1,6 +1,7 @@
 package br.com.fiap.plusoft.challenge.java.model.score;
 
 import br.com.fiap.plusoft.challenge.java.model.figuraPublica.FiguraPublica;
+import br.com.fiap.plusoft.challenge.java.model.pesquisa.dto.CriarPesquisaDTO;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -27,5 +28,9 @@ public class Score {
     @OneToOne
     @JoinColumn(name = "cd_fig_publica")
     private FiguraPublica figuraPublica;
+
+    public Score(CriarPesquisaDTO dto){
+        this.numeroScore = dto.getNumeroScore();
+    }
 
 }

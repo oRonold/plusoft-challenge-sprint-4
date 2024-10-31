@@ -1,6 +1,7 @@
 package br.com.fiap.plusoft.challenge.java.model.tipoServico;
 
 import br.com.fiap.plusoft.challenge.java.model.pesquisa.Pesquisa;
+import br.com.fiap.plusoft.challenge.java.model.pesquisa.dto.CriarPesquisaDTO;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -27,5 +28,9 @@ public class TipoServico {
 
     @OneToMany(mappedBy = "tipoServico", cascade = {CascadeType.PERSIST, CascadeType.MERGE})
     private List<Pesquisa> pesquisas;
+
+    public TipoServico(CriarPesquisaDTO dto){
+        this.descricao = dto.getTipoServico();
+    }
 
 }

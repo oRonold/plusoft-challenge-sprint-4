@@ -2,6 +2,7 @@ package br.com.fiap.plusoft.challenge.java.model.figuraPublica;
 
 import br.com.fiap.plusoft.challenge.java.model.categoria.Categoria;
 import br.com.fiap.plusoft.challenge.java.model.pesquisa.Pesquisa;
+import br.com.fiap.plusoft.challenge.java.model.pesquisa.dto.CriarPesquisaDTO;
 import br.com.fiap.plusoft.challenge.java.model.score.Score;
 import jakarta.persistence.*;
 import lombok.Getter;
@@ -40,5 +41,13 @@ public class FiguraPublica {
     @ManyToOne(cascade = {CascadeType.PERSIST, CascadeType.MERGE})
     @JoinColumn(name = "cd_categoria")
     private Categoria categoria;
+
+    public FiguraPublica(CriarPesquisaDTO dto){
+        this.nome = dto.getNomeFigPublica();
+        this.nomeArtistico = dto.getNomeArtistico();
+        this.nomeRedeSocial = dto.getNomeRedeSocial();
+        this.score = new Score(dto);
+        this.categoria = new Categoria(dto);
+    }
 
 }

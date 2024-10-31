@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="pt-br" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Criar Pesquisa</title>
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body>
+<div class="container mt-5">
+    <h2 class="text-center mb-4">Nova Pesquisa</h2>
+    <form th:action="@{/pesquisas/cadastrar}" method="post" th:object="${pesquisa}">
+
+        <div class="card mb-4">
+            <div class="card-header">Dados Pesquisa</div>
+            <div class="card-body">
+                <div class="form-group">
+                    <label class="form-label">Descrição da Pesquisa</label>
+                    <input type="text" class="form-control" th:field="*{descricao}" required>
+                    <p th:if="${#fields.hasErrors('descricao')}" class="text text-danger" th:errors="*{descricao}"></p>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-label">Nome Figura Pública</label>
+                    <input type="text" class="form-control" th:field="*{nomeFigPublica}" required>
+                    <p th:if="${#fields.hasErrors('nomeFigPublica')}" class="text text-danger" th:errors="*{nomeFigPublica}"></p>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-label">Nome Artístico</label>
+                    <input type="text" class="form-control" th:field="*{nomeArtistico}">
+                </div>
+
+                <div class="form-group">
+                    <label class="form-label">Rede Social</label>
+                    <input type="text" class="form-control" th:field="*{nomeRedeSocial}" required>
+                    <p th:if="${#fields.hasErrors('nomeRedeSocial')}" class="text text-danger" th:errors="*{nomeRedeSocial}"></p>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-label">Numero Score</label>
+                    <input type="number" class="form-control" th:field="*{numeroScore}" required>
+                    <p th:if="${#fields.hasErrors('numeroScore')}" class="text text-danger" th:errors="*{numeroScore}"></p>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-label">Categoria da Figura Pública</label>
+                    <input type="text" class="form-control" th:field="*{categoria}" required>
+                    <p th:if="${#fields.hasErrors('categoria')}" class="text text-danger" th:errors="*{categoria}"></p>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-label">Tipo de Serviço</label>
+                    <input type="text" class="form-control" th:field="*{tipoServico}" required>
+                    <p th:if="${#fields.hasErrors('tipoServico')}" class="text text-danger" th:errors="*{tipoServico}"></p>
+                </div>
+            </div>
+        </div>
+
+        <div class="card mb-4">
+            <button type="submit" class="btn btn-primary">Criar Pesquisa</button>
+        </div>
+    </form>
+</div>
+
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.2/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

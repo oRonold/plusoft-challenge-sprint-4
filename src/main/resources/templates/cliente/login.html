@@ -19,7 +19,7 @@
         <table class="table">
             <div class="card shadow-lg p-4">
                     <h4 class="text-center">Login</h4>
-                    <form th:action="@{/login}" method="post">
+                    <form th:action="@{/login}" method="post" th:object="${usuario}">
                         <div class="form-group mb-3">
                             <label class="form-label">Email</label>
                             <input type="text" name="username" class="form-control" required placeholder="Insira um email">
@@ -29,8 +29,8 @@
                             <input type="password" name="password" class="form-control" required placeholder="Insira uma senha">
                         </div>
                         <div class="form-group mb-3">
-<!--                            <a class="btn btn-outline-danger text-right mb-3" style="margin-right: 4em" th:href="@{/pacientes/esqueceu-senha}">Esqueceu a senha?</a>-->
-                            <a th:href="@{/clientes/registrar}" class="btn btn-outline-secondary mb-3">Não Possui Login?</a>
+                            <a class="btn btn-outline-secondary text-right mb-3" style="margin-right: 4em" th:href="@{/clientes/esqueceu-senha}">Esqueceu a senha?</a>
+                            <a th:href="@{/clientes/cadastrar}" class="btn btn-outline-secondary mb-3">Não Possui Login?</a>
                         </div>
                         <div class="d-grid">
                             <button type="submit" class="btn btn-primary">Entrar</button>

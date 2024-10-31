@@ -1,6 +1,7 @@
 package br.com.fiap.plusoft.challenge.java.model.categoria;
 
 import br.com.fiap.plusoft.challenge.java.model.figuraPublica.FiguraPublica;
+import br.com.fiap.plusoft.challenge.java.model.pesquisa.dto.CriarPesquisaDTO;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -27,5 +28,9 @@ public class Categoria {
 
     @OneToMany(mappedBy = "categoria")
     private List<FiguraPublica> figuraPublica;
+
+    public Categoria(CriarPesquisaDTO dto){
+        this.nome = dto.getCategoria();
+    }
 
 }

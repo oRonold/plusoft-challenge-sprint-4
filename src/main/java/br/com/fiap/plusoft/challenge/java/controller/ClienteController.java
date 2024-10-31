@@ -4,6 +4,7 @@ import br.com.fiap.plusoft.challenge.java.model.cliente.dto.CadastrarClienteDTO;
 import br.com.fiap.plusoft.challenge.java.model.usuario.dto.UsuarioLoginDTO;
 import br.com.fiap.plusoft.challenge.java.repository.PerfilRepository;
 import br.com.fiap.plusoft.challenge.java.service.UsuarioService;
+import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
@@ -27,7 +28,6 @@ public class ClienteController {
 
     @GetMapping("principal")
     public String home(){
-        System.out.println("Testando");
         return "index";
     }
 
@@ -40,7 +40,7 @@ public class ClienteController {
 
     @PostMapping("cadastrar")
     @Transactional
-    public String cadastrarCliente(@ModelAttribute CadastrarClienteDTO dto, BindingResult result){
+    public String cadastrarCliente(@ModelAttribute @Valid CadastrarClienteDTO dto, BindingResult result){
         if(result.hasErrors()){
             return "cliente/registrar";
         }
