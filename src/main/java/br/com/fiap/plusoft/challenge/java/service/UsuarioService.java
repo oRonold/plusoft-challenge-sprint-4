@@ -11,6 +11,7 @@ import br.com.fiap.plusoft.challenge.java.model.endereco.logradouro.Logradouro;
 import br.com.fiap.plusoft.challenge.java.model.endereco.pais.Pais;
 import br.com.fiap.plusoft.challenge.java.model.ramo.Ramo;
 import br.com.fiap.plusoft.challenge.java.model.usuario.Usuario;
+import br.com.fiap.plusoft.challenge.java.model.usuario.dto.EsqueceuSenhaDTO;
 import br.com.fiap.plusoft.challenge.java.repository.ClienteRepository;
 import br.com.fiap.plusoft.challenge.java.repository.PerfilRepository;
 import br.com.fiap.plusoft.challenge.java.repository.UsuarioRepository;
@@ -27,6 +28,7 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.authentication.logout.SecurityContextLogoutHandler;
 import org.springframework.stereotype.Service;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import java.util.HashSet;
 import java.util.List;
@@ -119,7 +121,21 @@ public class UsuarioService implements UserDetailsService {
         clienteRepository.save(cliente);
     }
 
-    public Usuario pacienteAutenticado(){
+    public String esqueceuSenha(EsqueceuSenhaDTO dto, RedirectAttributes redirectAttributes){
+        if(!usuarioRepository.existsUsuarioByEmail(dto.getEmail())){
+            redirectAttributes.addFlashAttribute("msgFailure", "O email não existe");
+            return "redirect:/clientes/esqueceu-senha";
+        }
+
+        var usuario = usuarioRepository.findByEmail(dto.getEmail());
+        usuario.setSenha(passwordEncoder.encode(dto.getSenha()));
+        usuarioRepository.save(usuario);
+
+        redirectAttributes.addFlashAttribute("msgSucess", "Senha atualizada com sucesso!");
+        return "redirect:/login";
+    }
+
+    public Usuario usuarioAutenticado(){
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
         if(auth != null && auth.getPrincipal() instanceof UserDetails){
             String username = ((UserDetails) auth.getPrincipal()).getUsername();

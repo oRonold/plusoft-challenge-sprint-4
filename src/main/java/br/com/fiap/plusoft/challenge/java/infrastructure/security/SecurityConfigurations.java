@@ -21,7 +21,7 @@ public class SecurityConfigurations {
                 .sessionManagement(sm -> sm
                         .maximumSessions(1))
                 .authorizeHttpRequests(authorize -> authorize
-                        .requestMatchers("/public/**", "/clientes/cadastrar", "/login", "/css/**").permitAll()
+                        .requestMatchers("/public/**", "/clientes/cadastrar", "/clientes/esqueceu-senha", "/login", "/css/**", "/webjars/**").permitAll()
                         .requestMatchers("/admin/**").hasAuthority("ADMIN")
                         .requestMatchers("/clientes/**", "/pesquisas/**", "/principal").hasAnyAuthority("ADMIN", "USER")
                         .anyRequest().authenticated())
