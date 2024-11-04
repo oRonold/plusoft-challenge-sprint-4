@@ -22,7 +22,7 @@ public class CadastrarClienteDTO {
     private LocalDate dataNascimento;
 
     @NotEmpty
-    @Length(max = 11)
+    @Length(max = 15)
     private String cpf;
 
     @NotEmpty
