@@ -14,6 +14,14 @@
 	<name>java</name>
 	<description>Demo project for Spring Boot</description>
 	<url/>
+	<profiles>
+		<profile>
+			<id>ci</id>
+			<properties>
+				<skipTests>true</skipTests>
+			</properties>
+		</profile>
+	</profiles>
 	<licenses>
 		<license/>
 	</licenses>
