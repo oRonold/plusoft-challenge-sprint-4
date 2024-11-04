@@ -1,4 +1,4 @@
-# Java Advanced - Sprint 4
+# Aplicação de Pesquisa de Análise de Sentimento de Celebridades
 
 ## Integrantes:
 - Ronald de Oliveira Farias - RM 552364
