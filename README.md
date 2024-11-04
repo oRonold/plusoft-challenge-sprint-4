@@ -1,5 +1,18 @@
 # Aplicação de Pesquisa de Análise de Sentimento de Celebridades
 
+## Referente a entrega de DevOps Tools & Cloud Computing:
+
+- Acesso à pipeline: https://dev.azure.com/RM552228/Innov8tech/
+- Realizar o run da pipeline Innov8tech-Maven-CI
+- Na realease 3 realizar o deploy
+- Para testar a aplicação você deve vir nesta URL (Pode demorar um pouco para carregar): app-sprint4-innov8tech.azurewebsites.net/login
+- Email para login: lserbato@gmail.com
+- Senha: 123456
+
+##
+
+## Referente a entrega de Java Advanced:
+
 ## Integrantes:
 - Ronald de Oliveira Farias - RM 552364
 - Gustavo Carvalho Noia - RM 552466
